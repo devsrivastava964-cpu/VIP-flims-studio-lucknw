@@ -1,0 +1,11 @@
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>

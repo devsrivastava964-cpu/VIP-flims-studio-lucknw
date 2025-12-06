@@ -1,0 +1,133 @@
+  <div class="hero-inner container">
+    <h2 class="brand-line">VIO <span>Films &amp; Studio</span></h2>
+    <h3 class="subtitle">Professional Photography &amp; Cinematic Videography</h3>
+
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-primary">Explore Services</a>
+      <a href="#gallery" class="btn btn-outline">View Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section services-section container">
+  <h3 class="section-title">Services</h3>
+  <p class="section-sub">Cinematic, professional and event-driven photography & videography services tailored for storytelling.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <i class="fa-solid fa-film icon"></i>
+      <h4>Cinematic Shoots</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-camera-retro icon"></i>
+      <h4>Professional Shoots</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-box icon"></i>
+      <h4>Product Shoots</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-ring-wedding icon"></i>
+      <h4>Wedding Photography &amp; Videography</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-heart icon"></i>
+      <h4>Pre-Wedding Shoots</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-calendar-days icon"></i>
+      <h4>Event Coverage</h4>
+    </div>
+    <div class="service-card">
+      <i class="fa-solid fa-video icon"></i>
+      <h4>Short Films &amp; Music Videos</h4>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section gallery-section container">
+  <h3 class="section-title">Gallery</h3>
+  <p class="section-sub">Cinematic selection — click to open slider. Upload your own photos or videos to preview locally.</p>
+
+  <div class="upload-area">
+    <label class="upload-btn">
+      <input id="mediaUpload" type="file" accept="image/*,video/*" multiple />
+      <i class="fa-solid fa-cloud-arrow-up"></i> Upload Photos / Videos
+    </label>
+    <small class="muted">Files preview locally only — you can add uploads later to your chosen hosting/CDN.</small>
+  </div>
+
+  <div id="galleryGrid" class="gallery-grid" aria-live="polite">
+    <!-- initial placeholders (replace later with real photos/videos) -->
+    <figure class="gallery-item" data-type="image">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Cinematic sample 1" />
+    </figure>
+    <figure class="gallery-item" data-type="image">
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Cinematic sample 2" />
+    </figure>
+    <figure class="gallery-item" data-type="video">
+      <video muted loop playsinline>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+    </figure>
+    <figure class="gallery-item" data-type="image">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Cinematic sample 3" />
+    </figure>
+  </div>
+
+  <!-- modal slider -->
+  <div id="mediaModal" class="media-modal" aria-hidden="true">
+    <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+    <button id="modalPrev" class="modal-nav prev" aria-label="Previous">&#10094;</button>
+    <div class="modal-stage" id="modalStage"></div>
+    <button id="modalNext" class="modal-nav next" aria-label="Next">&#10095;</button>
+  </div>
+</section>
+
+<!-- ABOUT / OWNER -->
+<section id="about" class="section about-section container">
+  <h3 class="section-title">About the Owner</h3>
+  <div class="about-inner">
+    <div class="about-photo" aria-hidden="true">
+      <!-- Placeholder portrait -->
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="">
+    </div>
+    <div class="about-bio">
+      <h4>Vinay Kumar Srivastava</h4>
+      <p>Vinay Kumar Srivastava is a seasoned cinematographer and photographer with over a decade of experience crafting cinematic stories for weddings, brands and filmmakers. Starting his journey as an assistant on short film sets, he developed a deep appreciation for light, composition and the emotional power of moving images. Vinay specializes in cinematic shoots, short films, music videos and high-end product photography — combining modern filmmaking techniques with a refined, editorial aesthetic. He leads a small, passionate team at VIO Films &amp; Studio focused on delivering polished, story-driven visuals and a smooth client experience from pre-production to final grade.</p>
+
+      <p class="muted">Based in: B-16 Shivajipuram, Dhaniya Meri Pul — near Ajanta Dairy</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact-section container">
+  <h3 class="section-title">Contact</h3>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h4>Studio Address</h4>
+      <p>B-16 Shivajipuram, Dhaniya Meri Pul, near Ajanta Dairy</p>
+    </div>
+    <div class="contact-card">
+      <h4>Contact</h4>
+      <p>Phone: <a href="tel:+917007049972">7007049972</a></p>
+      <p>Helpline: <a href="tel:+917007092394">7007092394</a></p>
+      <p>Email: <a href="mailto:hello@viofilms.example">hello@viofilms.example</a></p>
+    </div>
+    <div class="contact-card">
+      <h4>Quick Message</h4>
+      <form id="contactForm" action="#" onsubmit="event.preventDefault(); alert('This is a demo contact form. Integrate with your backend to receive messages.');">
+        <label class="sr-only" for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" required />
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" type="email" placeholder="Email" required />
+        <label class="sr-only" for="message">Message</label>
+        <textarea id="message" rows="3" placeholder="Message"></textarea>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>

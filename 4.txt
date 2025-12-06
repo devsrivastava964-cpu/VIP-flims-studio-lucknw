@@ -1,0 +1,151 @@
+// Main interactive behavior for the VIO Films & Studio demo site
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Splash handling: show for ~2.6s, then reveal header
+  const splash = document.getElementById('splash');
+  const header = document.getElementById('site-header');
+  setTimeout(() => {
+    splash.classList.add('fade-out');
+    splash.style.transition = 'opacity 420ms ease, transform 420ms ease';
+    splash.style.opacity = '0';
+    splash.style.transform = 'translateY(-6px)';
+    setTimeout(() => {
+      splash.remove();
+      header.classList.remove('hidden');
+    }, 480);
+  }, 2600);
+
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  mobileBtn?.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
+
+  // Gallery: clicking opens modal slider
+  const galleryGrid = document.getElementById('galleryGrid');
+  const modal = document.getElementById('mediaModal');
+  const modalStage = document.getElementById('modalStage');
+  const modalClose = document.getElementById('modalClose');
+  const modalPrev = document.getElementById('modalPrev');
+  const modalNext = document.getElementById('modalNext');
+
+  // Keep track of items
+  const items = () => Array.from(galleryGrid.querySelectorAll('.gallery-item'));
+  let currentIndex = 0;
+
+  function openModal(index) {
+    const list = items();
+    if (!list[index]) return;
+    currentIndex = index;
+    renderModalItem(list[currentIndex]);
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    modalStage.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function renderModalItem(el) {
+    modalStage.innerHTML = '';
+    const type = el.dataset.type || 'image';
+    if (type === 'video') {
+      const video = el.querySelector('video')?.cloneNode(true);
+      if (video) {
+        video.controls = true;
+        video.autoplay = true;
+        modalStage.appendChild(video);
+      }
+    } else {
+      const img = el.querySelector('img')?.cloneNode(true);
+      if (img) {
+        modalStage.appendChild(img);
+      }
+    }
+  }
+
+  galleryGrid.addEventListener('click', (e) => {
+    let el = e.target;
+    // find closest .gallery-item
+    while (el && !el.classList.contains('gallery-item')) {
+      el = el.parentElement;
+    }
+    if (!el) return;
+    const list = items();
+    const idx = list.indexOf(el);
+    if (idx >= 0) openModal(idx);
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  modalPrev.addEventListener('click', () => {
+    const list = items();
+    currentIndex = (currentIndex - 1 + list.length) % list.length;
+    renderModalItem(list[currentIndex]);
+  });
+  modalNext.addEventListener('click', () => {
+    const list = items();
+    currentIndex = (currentIndex + 1) % list.length;
+    renderModalItem(list[currentIndex]);
+  });
+
+  // Upload preview (client-side only)
+  const uploadInput = document.getElementById('mediaUpload');
+  uploadInput?.addEventListener('change', (ev) => {
+    const files = Array.from(ev.target.files || []);
+    files.forEach(file => {
+      const figure = document.createElement('figure');
+      figure.className = 'gallery-item';
+      const type = file.type.startsWith('video') ? 'video' : 'image';
+      figure.dataset.type = type;
+
+      if (type === 'video') {
+        const video = document.createElement('video');
+        video.controls = false;
+        video.muted = true;
+        video.playsInline = true;
+        video.loop = true;
+        const source = document.createElement('source');
+        source.src = URL.createObjectURL(file);
+        source.type = file.type;
+        video.appendChild(source);
+        figure.appendChild(video);
+      } else {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.alt = file.name || 'Uploaded image';
+        figure.appendChild(img);
+      }
+      // append to grid
+      galleryGrid.prepend(figure);
+    });
+    // reset input so same file can be re-uploaded if needed
+    uploadInput.value = '';
+  });
+
+  // Keyboard navigation for modal
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('show')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') modalPrev.click();
+    if (e.key === 'ArrowRight') modalNext.click();
+  });
+
+  // Soft entrance animations for elements into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(ent => {
+      if (ent.isIntersecting) {
+        ent.target.classList.add('in-view');
+      }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.service-card, .gallery-item, .about-inner, .contact-card').forEach(el => observer.observe(el));
+
+});
